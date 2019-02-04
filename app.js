@@ -13,8 +13,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // signup route
 app.post('/signup', (req, res) => {
-  console.log(req.body);
-  res.send('hello');
+  const { firstName, lastName, email } = req.body;
+
+  // make sure fields are filled
+  if(!firstName || !lastName || !email) {
+    res.redirect('/fail.html');
+    return;
+  }
 });
 
 const PORT = process.env.PORT || 5000;
